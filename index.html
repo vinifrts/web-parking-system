@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistema de Estacionamento</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Estacionamento</h1>
+        </div>
+
+        <div class="main-content">
+            
+            <div class="section">
+                <h2>Entrada de Veículos</h2>
+                <div class="form-group">
+                    <label for="plateEntry">Placa do Veículo (Padrão Mercosul):</label>
+                    <input type="text" id="plateEntry" maxlength="7">
+                </div>
+                <div class="form-group">
+                    <label for="entryTime">Horário de Entrada:</label>
+                    <input type="datetime-local" id="entryTime">
+                </div>
+                <button class="btn btn-success" onclick="registerEntry()">Registrar Entrada</button>
+                <button class="btn" onclick="validatePlate()">Validar Placa</button>
+                <div id="entryStatus" class="status-display" style="display: none;"></div>
+            </div>
+
+            <div class="section">
+                <h2>Saída de Veículos</h2>
+                <div class="form-group">
+                    <label for="plateExit">Placa do Veículo:</label>
+                    <input type="text" id="plateExit" maxlength="7">
+                </div>
+                <div class="form-group">
+                    <label for="exitTime">Horário de Saída:</label>
+                    <input type="datetime-local" id="exitTime">
+                </div>
+                <button class="btn btn-danger" onclick="registerExit()">Registrar Saída</button>
+                <button class="btn btn-warning" onclick="calculateCost()">Calcular Valor</button>
+                <div id="exitStatus" class="status-display" style="display: none;"></div>
+            </div>
+
+            <div class="section full-width">
+                <h2 class="centered">Mapa do Estacionamento</h2>
+                <div class="form-group">
+                    <label for="gridSize">Configurar Tamanho (MxN):</label>
+                    <select id="gridSize" onchange="updateParkingGrid()">
+                        <option value="5x5">5x5 (25 vagas)</option>
+                        <option value="6x6">6x6 (36 vagas)</option>
+                        <option value="8x6">8x6 (48 vagas)</option>
+                        <option value="10x8">10x8 (80 vagas)</option>
+                    </select>
+                </div>
+                <div id="parkingGrid" class="parking-grid"></div>
+                
+                <div class="stats">
+                    <div class="stat-card">
+                        <div class="stat-number" id="totalSpots">25</div>
+                        <div class="stat-label">Total de Vagas</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number" id="occupiedSpots">0</div>
+                        <div class="stat-label">Vagas Ocupadas</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number" id="freeSpots">25</div>
+                        <div class="stat-label">Vagas Livres</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section full-width">
+                <h2>Ticket de Estacionamento</h2>
+                <div id="ticketDisplay" class="ticket" style="display: none;">
+                    <h3>SHOPPING CENTER - TICKET DE ESTACIONAMENTO</h3>
+                    <div class="ticket-info">
+                        <span>Placa:</span>
+                        <span id="ticketPlate"></span>
+                    </div>
+                    <div class="ticket-info">
+                        <span>Estado:</span>
+                        <span id="ticketState"></span>
+                    </div>
+                    <div class="ticket-info">
+                        <span>Vaga:</span>
+                        <span id="ticketSpot"></span>
+                    </div>
+                    <div class="ticket-info">
+                        <span>Entrada:</span>
+                        <span id="ticketEntryTime"></span>
+                    </div>
+                    <div class="ticket-info">
+                        <span>Saída:</span>
+                        <span id="ticketExitTime"></span>
+                    </div>
+                    <div class="ticket-info">
+                        <span>Tempo:</span>
+                        <span id="ticketDuration"></span>
+                    </div>
+                    <div class="ticket-info" style="border-top: 2px dashed #0662f6; padding-top: 10px; margin-top: 10px; font-size: 1.2em;">
+                        <span><strong>Valor Total:</strong></span>
+                        <span id="ticketTotal"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="creditAutor">
+            <p>Desenvolvido por Vinícius Freitas</p>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
